@@ -1,0 +1,78 @@
+{
+  "name": "ws-excel",
+  "version": "1.0.0",
+  "private": true,
+  "keywords": [
+    "create-by-yarn-tool"
+  ],
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "review:all": "lerna run review --concurrency 1",
+    "coverage:all": "lerna run coverage --concurrency 1",
+    "lint:all": "lerna run lint --concurrency 1",
+    "pretest": "echo workspaces pretest",
+    "test": "yarn-tool ws run test",
+    "test:all": "lerna run test --concurrency 1",
+    "test:jest:clearCache": "jest --clearCache",
+    "install:reset-lockfile": "yarn-tool install --reset-lockfile",
+    "build:all": "lerna run build --concurrency 1",
+    "ci:install": "yarn install --frozen-lockfile && yarn add -W typescript@next jest ts-jest ts-node ynpx lerna yarn-tool",
+    "ci:build": "echo workspaces ci:build",
+    "lerna:publish": "yarn run prepublishOnly:root && lerna publish && yarn run postpublishOnly",
+    "lerna:publish:yes": "yarn run prepublishOnly:root && lerna publish --yes --bump patch && yarn run postpublishOnly",
+    "preversion": "yt ws run test",
+    "version": "echo workspaces version",
+    "postversion": "echo workspaces postversion",
+    "prepublish": "echo workspaces prepublish",
+    "prepare": "echo workspaces prepare",
+    "prepare:fix-ws-links": "ynpx --quiet @yarn-tool/fix-ws-links",
+    "prepublishOnly": "echo workspaces prepublishOnly",
+    "prepublishOnly:check-bin": "ynpx --quiet @yarn-tool/check-pkg-bin",
+    "prepublishOnly:lockfile": "ynpx --quiet sync-lockfile",
+    "prepublishOnly:root": "yarn run prepublishOnly:check-bin && yarn run prepare:fix-ws-links",
+    "prepublishOnly:update": "yarn run ncu && yarn run sort-package-json",
+    "prepack": "echo workspaces prepack",
+    "pack": "echo workspaces pack",
+    "postpack": "echo workspaces postpack",
+    "publish": "echo workspaces publish",
+    "postpublish": "echo workspaces postpublish",
+    "postpublishOnly": "yarn run postpublishOnly:ws-root-changelog & echo postpublishOnly",
+    "postpublishOnly:ws-root-changelog": "ynpx ws-root-changelog & git add ./CHANGELOG.md & git commit ./CHANGELOG.md -m \"chore(changelog): update changelog toc in workspaces root\" & echo update changelog toc in workspaces root",
+    "ncu": "yarn run ncu:root && yarn run ncu:ws",
+    "ncu:root": "yarn-tool ncu -u",
+    "ncu:ws": "yarn-tool ws exec yarn-tool ncu -- -u",
+    "sort-package-json": "yarn run sort-package-json:root && yarn run sort-package-json:ws",
+    "sort-package-json:root": "yarn-tool sort",
+    "sort-package-json:ws": "yarn-tool ws sort",
+    "tsc:showConfig": "ynpx get-current-tsconfig -p",
+    "ws:fix-all": "yarn-tool fix-all  --overwriteHostedGitInfo"
+  },
+  "resolutions": {},
+  "dependencies": {
+    "fs-extra": "^10.1.0",
+    "ts-type": "^1.2.32",
+    "tslib": "^2.3.1",
+    "upath2": "^3.1.13",
+    "xlsx": "^0.18.5",
+    "xlsx-style": "^0.8.13"
+  },
+  "devDependencies": {
+    "@bluelovers/tsconfig": "^1.0.28",
+    "@types/fs-extra": "^9.0.13",
+    "@types/jest": "^27.4.1",
+    "@types/node": "*"
+  },
+  "peerDependencies": {
+    "@bluelovers/conventional-changelog-bluelovers": "*",
+    "@yarn-tool/require-resolve": "*",
+    "lerna": "*",
+    "ts-node": "*",
+    "typescript": "*",
+    "yarn": "*",
+    "yarn-tool": "*",
+    "ynpx": "*"
+  },
+  "packageManager": "yarn@^1.22.11"
+}
