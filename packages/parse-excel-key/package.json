@@ -1,6 +1,6 @@
 {
   "name": "parse-excel-key",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "parse and compare excel cell key",
   "keywords": [
     "excel",
@@ -68,8 +68,5 @@
     "sort-package-json": "yarn-tool sort",
     "tsc:showConfig": "ynpx get-current-tsconfig -p"
   },
-  "dependencies": {},
-  "devDependencies": {},
-  "peerDependencies": {},
   "packageManager": "yarn@^1.22.11"
 }
