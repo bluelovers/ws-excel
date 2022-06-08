@@ -2,24 +2,24 @@ const e = /^([A-Z]+)(\d+)$/;
 
 function _getParsedMaxKeyCore(e, o) {
   let r;
-  for (const t in e) {
-    let e = parseRowKey(t);
+  for (const l in e) {
+    let e = parseCellKey(l);
     null != e && e.length && (void 0 === r || o(e, r) > 0) && (r = e);
   }
   return r;
 }
 
-function parseRowKey(o) {
+function parseCellKey(o) {
   const r = e.exec(o);
   return null !== r && (r.s = r[0], r.c = r[1], r.r = r[2]), r;
 }
 
 function compareExcelColKey(e, o) {
-  return _compareExcelColKeyCore(parseRowKey(e), parseRowKey(o));
+  return _compareExcelColKeyCore(parseCellKey(e), parseCellKey(o));
 }
 
 function compareExcelRowKey(e, o) {
-  return _compareExcelColKeyCore(parseRowKey(e), parseRowKey(o));
+  return _compareExcelRowKeyCore(parseCellKey(e), parseCellKey(o));
 }
 
 function _compareExcelColKeyCore(e, o) {
@@ -32,7 +32,7 @@ function _compareExcelRowKeyCore(e, o) {
 
 function _compareExcelColKey(e, o) {
   const r = Math.max(e.length, o.length);
-  for (let t = 0; t < r; t++) {
+  for (let l = 0; l < r; l++) {
     let r = e[0].charCodeAt(0) - o[0].charCodeAt(0);
     if (r) return r;
   }
@@ -60,8 +60,8 @@ function getMaxRowKey(e) {
 }
 
 function isRowKey(e) {
-  return null !== parseRowKey(e);
+  return null !== parseCellKey(e);
 }
 
-export { _compareExcelColKey, _compareExcelColKeyCore, _compareExcelRowKeyCore, _getParsedMaxKeyCore, compareExcelColKey, compareExcelRowKey, getMaxColKey, getMaxRow, getMaxRowKey, getParsedMaxColKey, getParsedMaxRowKey, isRowKey, parseRowKey };
+export { _compareExcelColKey, _compareExcelColKeyCore, _compareExcelRowKeyCore, _getParsedMaxKeyCore, compareExcelColKey, compareExcelRowKey, getMaxColKey, getMaxRow, getMaxRowKey, getParsedMaxColKey, getParsedMaxRowKey, isRowKey, parseCellKey };
 //# sourceMappingURL=index.esm.mjs.map

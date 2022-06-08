@@ -1,6 +1,6 @@
 import { Sheet } from 'xlsx';
 import { _compareExcelColKeyCore, _compareExcelRowKeyCore } from './compare';
-import { _getParsedMaxKeyCore, parseRowKey } from './core';
+import { _getParsedMaxKeyCore, parseCellKey } from './core';
 
 export * from './core';
 export * from './compare';
@@ -33,5 +33,5 @@ export function getMaxRowKey(sheet: Sheet)
 
 export function isRowKey(key: string)
 {
-	return parseRowKey(key) !== null
+	return parseCellKey(key) !== null
 }

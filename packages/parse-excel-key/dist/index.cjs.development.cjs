@@ -7,7 +7,7 @@ function _getParsedMaxKeyCore(sheet, compareFn) {
   let lastKey;
 
   for (const curKey in sheet) {
-    let parsed = parseRowKey(curKey);
+    let parsed = parseCellKey(curKey);
 
     if (parsed !== null && parsed !== void 0 && parsed.length) {
       if (typeof lastKey === 'undefined' || compareFn(parsed, lastKey) > 0) {
@@ -18,7 +18,7 @@ function _getParsedMaxKeyCore(sheet, compareFn) {
 
   return lastKey;
 }
-function parseRowKey(key) {
+function parseCellKey(key) {
   const result = RE_ROW_KEY.exec(key);
 
   if (result !== null) {
@@ -31,14 +31,14 @@ function parseRowKey(key) {
 }
 
 function compareExcelColKey(a, b) {
-  const r1 = parseRowKey(a);
-  const r2 = parseRowKey(b);
+  const r1 = parseCellKey(a);
+  const r2 = parseCellKey(b);
   return _compareExcelColKeyCore(r1, r2);
 }
 function compareExcelRowKey(a, b) {
-  const r1 = parseRowKey(a);
-  const r2 = parseRowKey(b);
-  return _compareExcelColKeyCore(r1, r2);
+  const r1 = parseCellKey(a);
+  const r2 = parseCellKey(b);
+  return _compareExcelRowKeyCore(r1, r2);
 }
 function _compareExcelColKeyCore(r1, r2) {
   return r1.c.length - r2.c.length || _compareExcelColKey(r1.c, r2.c);
@@ -76,7 +76,7 @@ function getMaxRowKey(sheet) {
   return getParsedMaxRowKey(sheet).s;
 }
 function isRowKey(key) {
-  return parseRowKey(key) !== null;
+  return parseCellKey(key) !== null;
 }
 
 exports._compareExcelColKey = _compareExcelColKey;
@@ -91,5 +91,5 @@ exports.getMaxRowKey = getMaxRowKey;
 exports.getParsedMaxColKey = getParsedMaxColKey;
 exports.getParsedMaxRowKey = getParsedMaxRowKey;
 exports.isRowKey = isRowKey;
-exports.parseRowKey = parseRowKey;
+exports.parseCellKey = parseCellKey;
 //# sourceMappingURL=index.cjs.development.cjs.map

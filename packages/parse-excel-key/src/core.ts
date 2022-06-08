@@ -8,7 +8,7 @@ export function _getParsedMaxKeyCore(sheet: Sheet, compareFn: ICompareParsedFn)
 	let lastKey: IParsedRowKey;
 	for (const curKey in sheet)
 	{
-		let parsed = parseRowKey(curKey);
+		let parsed = parseCellKey(curKey);
 		if (parsed?.length)
 		{
 			if (typeof lastKey === 'undefined' || compareFn(parsed, lastKey) > 0)
@@ -20,7 +20,7 @@ export function _getParsedMaxKeyCore(sheet: Sheet, compareFn: ICompareParsedFn)
 	return lastKey
 }
 
-export function parseRowKey(key: string): IParsedRowKey | null
+export function parseCellKey(key: string): IParsedRowKey | null
 {
 	const result: IParsedRowKey = RE_ROW_KEY.exec(key) as any
 

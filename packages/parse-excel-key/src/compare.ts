@@ -1,20 +1,20 @@
-import { parseRowKey } from './core';
+import { parseCellKey } from './core';
 import { IParsedRowKey } from './types';
 
 export function compareExcelColKey(a: string, b: string): number
 {
-	const r1 = parseRowKey(a);
-	const r2 = parseRowKey(b);
+	const r1 = parseCellKey(a);
+	const r2 = parseCellKey(b);
 
 	return _compareExcelColKeyCore(r1, r2)
 }
 
 export function compareExcelRowKey(a: string, b: string): number
 {
-	const r1 = parseRowKey(a);
-	const r2 = parseRowKey(b);
+	const r1 = parseCellKey(a);
+	const r2 = parseCellKey(b);
 
-	return _compareExcelColKeyCore(r1, r2)
+	return _compareExcelRowKeyCore(r1, r2)
 }
 
 export function _compareExcelColKeyCore(r1: IParsedRowKey, r2: IParsedRowKey): number

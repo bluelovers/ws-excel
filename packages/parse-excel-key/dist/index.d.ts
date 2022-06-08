@@ -20,7 +20,7 @@ export declare type IParsedRowKey = RegExpExecArray & [
 };
 export declare type ICompareParsedFn = (r1: IParsedRowKey, r2: IParsedRowKey) => number;
 export declare function _getParsedMaxKeyCore(sheet: Sheet, compareFn: ICompareParsedFn): IParsedRowKey;
-export declare function parseRowKey(key: string): IParsedRowKey | null;
+export declare function parseCellKey(key: string): IParsedRowKey | null;
 export declare function compareExcelColKey(a: string, b: string): number;
 export declare function compareExcelRowKey(a: string, b: string): number;
 export declare function _compareExcelColKeyCore(r1: IParsedRowKey, r2: IParsedRowKey): number;

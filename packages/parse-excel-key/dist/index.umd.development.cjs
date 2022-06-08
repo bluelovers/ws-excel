@@ -1,7 +1,7 @@
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
 	typeof define === 'function' && define.amd ? define(['exports'], factory) :
-	(global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.index = {}));
+	(global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global["parse-excel-key"] = {}));
 })(this, (function (exports) { 'use strict';
 
 	const RE_ROW_KEY = /^([A-Z]+)(\d+)$/;
@@ -9,7 +9,7 @@
 	  let lastKey;
 
 	  for (const curKey in sheet) {
-	    let parsed = parseRowKey(curKey);
+	    let parsed = parseCellKey(curKey);
 
 	    if (parsed !== null && parsed !== void 0 && parsed.length) {
 	      if (typeof lastKey === 'undefined' || compareFn(parsed, lastKey) > 0) {
@@ -20,7 +20,7 @@
 
 	  return lastKey;
 	}
-	function parseRowKey(key) {
+	function parseCellKey(key) {
 	  const result = RE_ROW_KEY.exec(key);
 
 	  if (result !== null) {
@@ -33,14 +33,14 @@
 	}
 
 	function compareExcelColKey(a, b) {
-	  const r1 = parseRowKey(a);
-	  const r2 = parseRowKey(b);
+	  const r1 = parseCellKey(a);
+	  const r2 = parseCellKey(b);
 	  return _compareExcelColKeyCore(r1, r2);
 	}
 	function compareExcelRowKey(a, b) {
-	  const r1 = parseRowKey(a);
-	  const r2 = parseRowKey(b);
-	  return _compareExcelColKeyCore(r1, r2);
+	  const r1 = parseCellKey(a);
+	  const r2 = parseCellKey(b);
+	  return _compareExcelRowKeyCore(r1, r2);
 	}
 	function _compareExcelColKeyCore(r1, r2) {
 	  return r1.c.length - r2.c.length || _compareExcelColKey(r1.c, r2.c);
@@ -78,7 +78,7 @@
 	  return getParsedMaxRowKey(sheet).s;
 	}
 	function isRowKey(key) {
-	  return parseRowKey(key) !== null;
+	  return parseCellKey(key) !== null;
 	}
 
 	exports._compareExcelColKey = _compareExcelColKey;
@@ -93,7 +93,7 @@
 	exports.getParsedMaxColKey = getParsedMaxColKey;
 	exports.getParsedMaxRowKey = getParsedMaxRowKey;
 	exports.isRowKey = isRowKey;
-	exports.parseRowKey = parseRowKey;
+	exports.parseCellKey = parseCellKey;
 
 	Object.defineProperty(exports, '__esModule', { value: true });
 
